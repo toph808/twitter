@@ -74,7 +74,7 @@ class SingleTweetViewController: UIViewController {
   }
   
     @IBAction func onBack(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
