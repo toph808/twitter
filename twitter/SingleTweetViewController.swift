@@ -48,7 +48,7 @@ class SingleTweetViewController: UIViewController {
     }
   
   func onReply(recognizer: UITapGestureRecognizer) {
-    println("huh")
+    println("Replying...")
   }
   
   func onRetweet(recognizer: UITapGestureRecognizer) {
