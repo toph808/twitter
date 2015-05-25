@@ -47,12 +47,13 @@ class SingleTweetViewController: UIViewController {
       favoriteIcon.addGestureRecognizer(favoriteTap)
     }
   
-  func onReply() {
+  func onReply(recognizer: UITapGestureRecognizer) {
     println("huh")
   }
   
-  func onRetweet() {
+  func onRetweet(recognizer: UITapGestureRecognizer) {
     var tweetId = self.tweet.id
+    println(tweetId)
     
     TwitterClient.sharedInstance.retweetWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {
@@ -61,10 +62,11 @@ class SingleTweetViewController: UIViewController {
     })
   }
   
-  func onFavorite() {
+  func onFavorite(recognizer: UITapGestureRecognizer) {
     var tweetId = self.tweet.id
+    println(tweetId)
     
-    TwitterClient.sharedInstance.retweetWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
+    TwitterClient.sharedInstance.favoriteWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {
         NSLog("Failed to favorite: \(error)")
       }
