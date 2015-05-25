@@ -13,9 +13,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     var tweets: [Tweet]?
   
     @IBOutlet weak var tableView: UITableView!
+    var refreshControl: UIRefreshControl!
   
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.insertSubview(self.refreshControl, atIndex: 0)
 
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
           self.tweets = tweets
@@ -26,6 +31,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
           self.tableView.estimatedRowHeight = 120
         })
     }
+  
+  func onRefresh() {
+    TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+      self.tweets = tweets
+      
+      if self.refreshControl.refreshing {
+        self.refreshControl.endRefreshing()
+      }
+      
+      self.tableView.reloadData()
+    })
+  }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
