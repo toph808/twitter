@@ -8,15 +8,22 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var tweets: [Tweet]?
+  
+    @IBOutlet weak var tableView: UITableView!
   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
           self.tweets = tweets
+          
+          self.tableView.dataSource = self
+          self.tableView.delegate = self
+          self.tableView.rowHeight = UITableViewAutomaticDimension
+          self.tableView.estimatedRowHeight = 120
         })
     }
 
@@ -24,19 +31,35 @@ class TweetsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-  @IBAction func onLogout(sender: AnyObject) {
-    User.currentUser?.logout()
-  }
+  
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return self.tweets?.count ?? 0
+    }
+  
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+      let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
+      
+      cell.tweet = self.tweets?[indexPath.row]
+      
+      return cell
+    }
+  
+    @IBAction func onLogout(sender: AnyObject) {
+      User.currentUser?.logout()
+    }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+      let cell = sender as! TweetCell
+      let tweet = cell.tweet
+      
+      if segue.identifier == "SingleTweetSegue" {
+        var nav = segue.destinationViewController as! UINavigationController
+        var vc = nav.topViewController as! SingleTweetViewController
+        vc.tweet = tweet
+      }
     }
-    */
 
 }

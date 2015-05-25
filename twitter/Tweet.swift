@@ -14,12 +14,18 @@ class Tweet: NSObject {
   var createdAtString: String?
   var createdAt: NSDate?
   var dictionary: NSDictionary
+  var retweetCount: String?
+  var favoriteCount: String?
+  var id: String?
   
   init(dictionary: NSDictionary) {
     self.dictionary = dictionary
     user = User(dictionary: dictionary["user"] as! NSDictionary)
     text = dictionary["text"] as? String
     createdAtString = dictionary["created_at"] as? String
+    retweetCount = dictionary["retweet_count"] as? String
+    favoriteCount = dictionary["favorite_count"] as? String
+    id = dictionary["id_str"] as? String
     
     // TODO: Make this formatter static and lazy
     var formatter = NSDateFormatter()
