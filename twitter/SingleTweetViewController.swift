@@ -27,10 +27,10 @@ class SingleTweetViewController: UIViewController {
       super.viewDidLoad()
 
       nameLabel.text = tweet.user!.name
-      screennameLabel.text = tweet.user!.screenname
+      screennameLabel.text = "@\(tweet.user!.screenname!)"
       tweetTextLabel.text = tweet.text
-      retweetCountLabel.text = tweet.retweetCount
-      favoriteCountLabel.text = tweet.favoriteCount
+      retweetCountLabel.text = tweet.retweetCount?.description
+      favoriteCountLabel.text = tweet.favoriteCount?.description
       profileImageView.setImageWithURL(tweet.user!.profileImageUrl)
       
       replyIcon.userInteractionEnabled = true

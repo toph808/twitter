@@ -23,12 +23,12 @@ class TweetCell: UITableViewCell {
     var tweet: Tweet! {
       didSet {
         nameLabel.text = tweet.user!.name
-        screennameLabel.text = tweet.user!.screenname
+        screennameLabel.text = "@\(tweet.user!.screenname!)"
         tweetTextLabel.text = tweet.text
         timeLabel.text = tweet.createdAt!.timeAgo()
         thumbImageView.setImageWithURL(tweet.user!.profileImageUrl)
-        retweetCountLabel.text = tweet.retweetCount
-        favoriteCountLabel.text = tweet.favoriteCount
+        retweetCountLabel.text = tweet.retweetCount?.description
+        favoriteCountLabel.text = tweet.favoriteCount?.description
       }
     }
   
