@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="AhN-dO-PEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="AhN-dO-PEX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hyp-MT-Gv7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hyp-MT-Gv7">
                                 <rect key="frame" x="137" y="189" width="38" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -27,11 +27,17 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hyp-MT-Gv7" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="125" id="Dl4-51-qxK"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hyp-MT-Gv7" secondAttribute="bottom" constant="349" id="gaq-4R-QDZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Hyp-MT-Gv7" secondAttribute="trailing" constant="145" id="icp-5T-VeP"/>
+                            <constraint firstItem="Hyp-MT-Gv7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="137" id="oRt-rb-n3U"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jjv-RE-onf"/>
                     <connections>
                         <outlet property="loginButton" destination="Hyp-MT-Gv7" id="YoJ-NH-UNy"/>
-                        <segue destination="oLS-fm-Sza" kind="modal" identifier="loginSegue" id="gVs-6I-ILQ"/>
+                        <segue destination="oLS-fm-Sza" kind="modal" identifier="LoginSegue" id="gVs-6I-ILQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -154,6 +160,7 @@
                                             <outlet property="favoriteCountLabel" destination="vcR-15-5MI" id="hmG-Td-I2F"/>
                                             <outlet property="favoriteIcon" destination="G9H-BM-AYM" id="csk-te-RzX"/>
                                             <outlet property="nameLabel" destination="0cn-y2-Osl" id="Eci-AQ-2E0"/>
+                                            <outlet property="replyIcon" destination="roI-6b-c9N" id="GcM-zf-cBT"/>
                                             <outlet property="retweetCountLabel" destination="sbu-ka-Kve" id="aJg-cM-m3l"/>
                                             <outlet property="retweetIcon" destination="pKN-cA-YxA" id="eAu-JA-h3a"/>
                                             <outlet property="screennameLabel" destination="KBe-ww-FKk" id="hsc-8i-kDW"/>
@@ -195,7 +202,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Lag-Sc-fsM" kind="modal" id="iJD-QI-gh0"/>
+                                    <segue destination="Lag-Sc-fsM" kind="modal" identifier="ComposeSegue" id="iJD-QI-gh0"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -227,12 +234,6 @@
                                     <constraint firstAttribute="height" constant="60" id="gPs-rA-d3N"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Michael Moran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aT0-mR-eCB">
-                                <rect key="frame" x="84" y="72" width="117" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@themichaelmoran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQp-cB-pv2">
                                 <rect key="frame" x="84" y="91" width="116" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
@@ -271,30 +272,50 @@
                                 <color key="textColor" red="0.49404761899999999" green="0.49404761899999999" blue="0.49404761899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="g7z-o8-7IM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="g7z-o8-7IM">
                                 <rect key="frame" x="84" y="214" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="6P3-y3-LrP"/>
                                     <constraint firstAttribute="height" constant="16" id="Uig-Y0-piB"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Created at" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdz-wJ-h7a">
+                                <rect key="frame" x="84" y="107" width="64" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Michael Moran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aT0-mR-eCB">
+                                <rect key="frame" x="84" y="72" width="117" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="5mr-qW-KVw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aT0-mR-eCB" firstAttribute="leading" secondItem="DQp-cB-pv2" secondAttribute="leading" id="3oA-0a-1Kh"/>
                             <constraint firstItem="XGU-bj-3YZ" firstAttribute="top" secondItem="N5M-sE-Z2v" secondAttribute="bottom" constant="8" id="8FR-VE-Khp"/>
-                            <constraint firstItem="aT0-mR-eCB" firstAttribute="top" secondItem="N5M-sE-Z2v" secondAttribute="bottom" constant="8" id="AA0-8N-5Px"/>
                             <constraint firstItem="865-Vw-YeH" firstAttribute="top" secondItem="Jm3-Gb-4ta" secondAttribute="bottom" constant="8" id="DJA-3s-Rpi"/>
-                            <constraint firstItem="aT0-mR-eCB" firstAttribute="leading" secondItem="XGU-bj-3YZ" secondAttribute="trailing" constant="8" id="Le9-vb-M1Z"/>
+                            <constraint firstItem="aT0-mR-eCB" firstAttribute="top" secondItem="XGU-bj-3YZ" secondAttribute="top" id="KcI-y5-4QO"/>
+                            <constraint firstItem="DQp-cB-pv2" firstAttribute="leading" secondItem="aT0-mR-eCB" secondAttribute="leading" id="TJM-lf-GhE"/>
                             <constraint firstItem="865-Vw-YeH" firstAttribute="bottom" secondItem="g7z-o8-7IM" secondAttribute="bottom" id="Vm8-h4-zos"/>
                             <constraint firstItem="865-Vw-YeH" firstAttribute="bottom" secondItem="yTr-lG-Tkw" secondAttribute="bottom" constant="-5" id="We6-H3-7jm"/>
                             <constraint firstItem="Jm3-Gb-4ta" firstAttribute="top" secondItem="XGU-bj-3YZ" secondAttribute="bottom" constant="8" id="a1T-OU-cIJ"/>
+                            <constraint firstItem="DQp-cB-pv2" firstAttribute="leading" secondItem="g7z-o8-7IM" secondAttribute="leading" id="bZC-qX-Bvh"/>
                             <constraint firstItem="865-Vw-YeH" firstAttribute="leading" secondItem="gC1-wf-cy6" secondAttribute="leading" constant="16" id="dZb-Qy-fN6"/>
+                            <constraint firstItem="DQp-cB-pv2" firstAttribute="top" secondItem="N5M-sE-Z2v" secondAttribute="bottom" constant="27" id="enR-Re-mAf"/>
                             <constraint firstAttribute="trailing" secondItem="Jm3-Gb-4ta" secondAttribute="trailing" constant="16" id="f04-4A-gTy"/>
-                            <constraint firstItem="Jm3-Gb-4ta" firstAttribute="top" secondItem="DQp-cB-pv2" secondAttribute="bottom" constant="32" id="jut-H5-VLK"/>
+                            <constraint firstItem="Jm3-Gb-4ta" firstAttribute="top" secondItem="Mdz-wJ-h7a" secondAttribute="bottom" constant="16" id="fKk-ox-bai"/>
+                            <constraint firstItem="DQp-cB-pv2" firstAttribute="leading" secondItem="Mdz-wJ-h7a" secondAttribute="leading" id="i5X-5D-DAg"/>
                             <constraint firstItem="865-Vw-YeH" firstAttribute="bottom" secondItem="vfP-QC-ExG" secondAttribute="bottom" constant="-5" id="mE8-TE-xuR"/>
                             <constraint firstItem="XGU-bj-3YZ" firstAttribute="leading" secondItem="gC1-wf-cy6" secondAttribute="leading" constant="16" id="mfZ-BV-T0B"/>
                             <constraint firstItem="DQp-cB-pv2" firstAttribute="leading" secondItem="XGU-bj-3YZ" secondAttribute="trailing" constant="8" id="uEP-ba-KLZ"/>
                             <constraint firstItem="865-Vw-YeH" firstAttribute="bottom" secondItem="egP-x6-YJQ" secondAttribute="bottom" id="vIF-kX-oLD"/>
+                            <constraint firstItem="Mdz-wJ-h7a" firstAttribute="leading" secondItem="XGU-bj-3YZ" secondAttribute="trailing" constant="8" id="y9p-cj-Q3h"/>
                             <constraint firstItem="Jm3-Gb-4ta" firstAttribute="leading" secondItem="gC1-wf-cy6" secondAttribute="leading" constant="16" id="zt5-5x-LP0"/>
                         </constraints>
                     </view>
@@ -308,7 +329,6 @@
                                 </state>
                                 <connections>
                                     <action selector="onBack:" destination="coF-rL-68z" eventType="touchUpInside" id="JqZ-3H-3fK"/>
-                                    <segue destination="oLS-fm-Sza" kind="modal" id="zAP-de-v29"/>
                                 </connections>
                             </button>
                             <connections>
@@ -324,7 +344,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onReply:" destination="coF-rL-68z" eventType="touchUpInside" id="eXI-yC-Ibl"/>
-                                    <segue destination="Lag-Sc-fsM" kind="modal" identifier="replySegue" id="tJP-2k-Ahs"/>
+                                    <segue destination="Lag-Sc-fsM" kind="modal" identifier="ReplySegue" id="tJP-2k-Ahs"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -357,14 +377,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZE5-k9-Bha">
-                                <rect key="frame" x="16" y="72" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZE5-k9-Bha">
+                                <rect key="frame" x="15" y="72" width="290" height="128"/>
+                                <color key="backgroundColor" red="0.87202380952380953" green="0.87202380952380953" blue="0.87202380952380953" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="9Ti-Y0-F2N"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-qz-UdN">
-                                <rect key="frame" x="16" y="208" width="111" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-qz-UdN">
+                                <rect key="frame" x="15" y="208" width="111" height="30"/>
                                 <state key="normal" title="Compose Tweet">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -374,17 +397,24 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZE5-k9-Bha" secondAttribute="trailing" constant="15" id="Cwm-S2-QS8"/>
+                            <constraint firstItem="ZE5-k9-Bha" firstAttribute="leading" secondItem="5C8-ej-OIh" secondAttribute="leading" constant="15" id="Nrb-Kz-heK"/>
+                            <constraint firstItem="ZE5-k9-Bha" firstAttribute="leading" secondItem="k1E-qz-UdN" secondAttribute="leading" id="OMz-KR-RzX"/>
+                            <constraint firstItem="ZE5-k9-Bha" firstAttribute="top" secondItem="Io1-ot-c7w" secondAttribute="bottom" constant="8" id="Rvh-Mn-zjn"/>
+                            <constraint firstItem="k1E-qz-UdN" firstAttribute="top" secondItem="ZE5-k9-Bha" secondAttribute="bottom" constant="8" id="T5M-tp-hTK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Compose" id="Bor-p8-Kzh">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="Rac-KH-soy">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jf0-Yb-FDc">
                                 <rect key="frame" x="-23" y="-15" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Tweets">
+                                <state key="normal" title="Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oLS-fm-Sza" kind="modal" id="5sE-5c-BCd"/>
+                                    <action selector="onBack:" destination="dYI-9A-yKd" eventType="touchUpInside" id="Rvm-xb-uxb"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -436,7 +466,6 @@
         <!--Navigation Controller-->
         <scene sceneID="UzX-ky-Pzu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ffp-fD-wEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PfL-8h-6RC" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="zNs-2E-RrJ"/>
@@ -449,6 +478,7 @@
                         <segue destination="coF-rL-68z" kind="relationship" relationship="rootViewController" id="8cV-Wo-gLj"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ffp-fD-wEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1603" y="328"/>
         </scene>
@@ -482,7 +512,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5sE-5c-BCd"/>
         <segue reference="iJD-QI-gh0"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
   
   var tweets: [Tweet]?
   
@@ -23,6 +23,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     self.tableView.insertSubview(self.refreshControl, atIndex: 0)
     
     TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+      if error != nil {
+        println(error)
+      }
       self.tweets = tweets
       
       self.tableView.dataSource = self
@@ -55,10 +58,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
+    cell.delegate = self
     
     cell.tweet = self.tweets?[indexPath.row]
     
     return cell
+  }
+  
+  func tweetCell(tweetCell: TweetCell, replyToTweetWithId tweetId: String) {
+    self.performSegueWithIdentifier("ComposeSegue", sender: self)
   }
   
   @IBAction func onLogout(sender: AnyObject) {

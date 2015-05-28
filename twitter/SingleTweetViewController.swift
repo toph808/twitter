@@ -39,21 +39,18 @@ class SingleTweetViewController: UIViewController {
     
     var replyTap = UITapGestureRecognizer(target: self, action:Selector("onReply:"))
     replyIcon.addGestureRecognizer(replyTap)
-    
     var retweetTap = UITapGestureRecognizer(target: self, action:Selector("onRetweet:"))
     retweetIcon.addGestureRecognizer(retweetTap)
-    
     var favoriteTap = UITapGestureRecognizer(target: self, action:Selector("onFavorite:"))
     favoriteIcon.addGestureRecognizer(favoriteTap)
   }
   
   func onReply(recognizer: UITapGestureRecognizer) {
-    //println("Replying...")
+    self.performSegueWithIdentifier("ReplySegue", sender: self)
   }
   
   func onRetweet(recognizer: UITapGestureRecognizer) {
     var tweetId = self.tweet.id
-    println(tweetId)
     
     TwitterClient.sharedInstance.retweetWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {
@@ -64,7 +61,6 @@ class SingleTweetViewController: UIViewController {
   
   func onFavorite(recognizer: UITapGestureRecognizer) {
     var tweetId = self.tweet.id
-    println(tweetId)
     
     TwitterClient.sharedInstance.favoriteWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {

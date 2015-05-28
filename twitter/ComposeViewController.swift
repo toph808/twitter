@@ -36,6 +36,10 @@ class ComposeViewController: UIViewController {
     })
   }
   
+  @IBAction func onBack(sender: AnyObject) {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
   /*
   // MARK: - Navigation
   
