@@ -45,7 +45,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   }
   
   override func viewDidAppear(animated: Bool) {
-    self.tableView.reloadData()
+    refreshData()
   }
   
   func refreshData() {
