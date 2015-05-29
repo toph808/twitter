@@ -10,11 +10,19 @@ import UIKit
 
 class ComposeViewController: UIViewController {
   
+  var inReplyToId: String?
+  var inReplyToUsername: String?
+  
   @IBOutlet weak var tweetTextView: UITextView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
+    if inReplyToUsername != nil {
+      tweetTextView.text = "@\(inReplyToUsername!) "
+    }
+    
+    self.tweetTextView.becomeFirstResponder()
   }
   
   override func didReceiveMemoryWarning() {
@@ -24,9 +32,13 @@ class ComposeViewController: UIViewController {
   
   @IBAction func onComposeTweetButton(sender: AnyObject) {
     var tweetText = self.tweetTextView.text
-    var params: NSDictionary = ["status": tweetText]
+    var params: Dictionary<String, AnyObject> = ["status": tweetText!]
+    if inReplyToId != nil {
+      params["in_reply_to_status_id"] = NSInteger(inReplyToId!.toInt()!)
+      params["in_reply_to_status_id_str"] = inReplyToId!
+    }
     
-    TwitterClient.sharedInstance.tweetWithParams(params, completion: { (status, error) -> () in
+    TwitterClient.sharedInstance.tweetWithParams(params as NSDictionary, completion: { (status, error) -> () in
       if error != nil {
         NSLog("Failed to tweet: \(error)")
         return

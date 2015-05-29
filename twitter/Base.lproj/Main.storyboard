@@ -202,6 +202,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="onComposeButton:" destination="WiC-Lg-M0J" eventType="touchUpInside" id="cQg-WN-a3J"/>
                                     <segue destination="Lag-Sc-fsM" kind="modal" identifier="ComposeSegue" id="iJD-QI-gh0"/>
                                 </connections>
                             </button>

@@ -11,6 +11,8 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetDelegate {
   
   var tweets: [Tweet]?
+  var inReplyToId: String?
+  var inReplyToUsername: String?
   
   @IBOutlet weak var tableView: UITableView!
   var refreshControl: UIRefreshControl!
@@ -59,13 +61,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
     cell.delegate = self
-    
     cell.tweet = self.tweets?[indexPath.row]
     
     return cell
   }
   
-  func didReply(tweetCell: TweetCell, replyToTweetWithId tweetId: String) {
+  @IBAction func onComposeButton(sender: AnyObject) {
+    inReplyToId = nil
+    inReplyToUsername = nil
+    self.performSegueWithIdentifier("ComposeSegue", sender: self)
+  }
+  
+  func didReply(tweet: Tweet) {
+    inReplyToId = tweet.id
+    inReplyToUsername = tweet.user!.screenname
     self.performSegueWithIdentifier("ComposeSegue", sender: self)
   }
   
@@ -97,6 +106,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
       var vc = nav.topViewController as! SingleTweetViewController
       vc.tweet = tweet
       vc.delegate = self
+    } else if segue.identifier == "ComposeSegue" {
+      var nav = segue.destinationViewController as! UINavigationController
+      var vc = nav.topViewController as! ComposeViewController
+      vc.inReplyToId = inReplyToId
+      if (inReplyToUsername != nil) {
+        vc.inReplyToUsername = inReplyToUsername!
+      }
     }
   }
   
