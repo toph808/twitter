@@ -21,6 +21,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.navigationController!.navigationBar.barTintColor = UIColor(red: 0.31, green: 0.67, blue: 0.945, alpha: 1.0)
+    self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+    self.navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+    
     self.refreshControl = UIRefreshControl()
     self.refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
     self.tableView.insertSubview(self.refreshControl, atIndex: 0)
