@@ -8,8 +8,10 @@
 
 import UIKit
 
-@objc protocol TweetCellDelegate {
-  optional func tweetCell(tweetCell: TweetCell, replyToTweetWithId tweetId: String)
+@objc protocol TweetDelegate {
+  optional func didRetweet(tweet: Tweet, tweetCell: TweetCell?)
+  optional func didFavorite(tweet: Tweet, tweetCell: TweetCell?)
+  optional func didReply(tweet: Tweet)
 }
 
 class TweetCell: UITableViewCell {
@@ -26,7 +28,7 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetIcon: UIImageView!
   @IBOutlet weak var favoriteIcon: UIImageView!
   
-  weak var delegate: TweetCellDelegate?
+  weak var delegate: TweetDelegate?
   
   var tweet: Tweet! {
     didSet {
@@ -37,6 +39,8 @@ class TweetCell: UITableViewCell {
       thumbImageView.setImageWithURL(tweet.user!.profileImageUrl)
       retweetCountLabel.text = tweet.retweetCount?.description
       favoriteCountLabel.text = tweet.favoriteCount?.description
+      retweetIcon.image = tweet.retweeted ?? false ? UIImage(named: "retweet_on") : UIImage(named: "retweet")
+      favoriteIcon.image = tweet.favorited ?? false ? UIImage(named: "favorite_on") : UIImage(named: "favorite")
     }
   }
   
@@ -74,7 +78,7 @@ class TweetCell: UITableViewCell {
   }
   
   func onReply(recognizer: UITapGestureRecognizer) {
-    delegate?.tweetCell?(self, replyToTweetWithId: self.tweet.id!)
+    delegate?.didReply?(self.tweet)
   }
   
   func onRetweet(recognizer: UITapGestureRecognizer) {
@@ -83,6 +87,8 @@ class TweetCell: UITableViewCell {
     TwitterClient.sharedInstance.retweetWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {
         NSLog("Failed to retweet: \(error)")
+      } else {
+        self.delegate?.didRetweet?(self.tweet, tweetCell: self)
       }
     })
   }
@@ -93,6 +99,8 @@ class TweetCell: UITableViewCell {
     TwitterClient.sharedInstance.favoriteWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {
         NSLog("Failed to favorite: \(error)")
+      } else {
+        self.delegate?.didFavorite?(self.tweet, tweetCell: self)
       }
     })
   }

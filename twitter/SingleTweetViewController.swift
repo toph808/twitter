@@ -21,6 +21,8 @@ class SingleTweetViewController: UIViewController {
   @IBOutlet weak var retweetIcon: UIImageView!
   @IBOutlet weak var favoriteIcon: UIImageView!
   
+  weak var delegate: TweetDelegate?
+  
   var tweet: Tweet!
   
   override func viewDidLoad() {
@@ -32,6 +34,9 @@ class SingleTweetViewController: UIViewController {
     retweetCountLabel.text = tweet.retweetCount?.description
     favoriteCountLabel.text = tweet.favoriteCount?.description
     profileImageView.setImageWithURL(tweet.user!.profileImageUrl)
+    
+    retweetIcon.image = tweet.retweeted ?? false ? UIImage(named: "retweet_on") : UIImage(named: "retweet")
+    favoriteIcon.image = tweet.favorited ?? false ? UIImage(named: "favorite_on") : UIImage(named: "favorite")
     
     replyIcon.userInteractionEnabled = true
     retweetIcon.userInteractionEnabled = true
@@ -55,6 +60,10 @@ class SingleTweetViewController: UIViewController {
     TwitterClient.sharedInstance.retweetWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {
         NSLog("Failed to retweet: \(error)")
+      } else {
+        self.delegate?.didRetweet?(self.tweet, tweetCell: nil)
+        self.retweetIcon.image = UIImage(named: "retweet_on")
+        self.retweetCountLabel.text = self.tweet.retweetCount!.description
       }
     })
   }
@@ -65,6 +74,10 @@ class SingleTweetViewController: UIViewController {
     TwitterClient.sharedInstance.favoriteWithParams(nil, tweetId: tweetId!, completion: { (tweet, error) -> () in
       if error != nil {
         NSLog("Failed to favorite: \(error)")
+      } else {
+        self.delegate?.didFavorite?(self.tweet, tweetCell: nil)
+        self.favoriteIcon.image = UIImage(named: "favorite_on")
+        self.favoriteCountLabel.text = self.tweet.favoriteCount!.description
       }
     })
   }

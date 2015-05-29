@@ -18,6 +18,8 @@ class Tweet: NSObject {
   var dictionary: NSDictionary
   var retweetCount: NSInteger?
   var favoriteCount: NSInteger?
+  var retweeted: Bool?
+  var favorited: Bool?
   var id: String?
   
   init(dictionary: NSDictionary) {
@@ -27,6 +29,8 @@ class Tweet: NSObject {
     createdAtString = dictionary["created_at"] as? String
     retweetCount = dictionary["retweet_count"] as? NSInteger
     favoriteCount = dictionary["favorite_count"] as? NSInteger
+    retweeted = dictionary["retweeted"] as? Bool
+    favorited = dictionary["favorited"] as? Bool
     id = dictionary["id_str"] as? String
     
     // TODO: Make this formatter static and lazy

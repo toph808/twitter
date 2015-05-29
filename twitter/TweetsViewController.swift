@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetDelegate {
   
   var tweets: [Tweet]?
   
@@ -65,8 +65,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     return cell
   }
   
-  func tweetCell(tweetCell: TweetCell, replyToTweetWithId tweetId: String) {
+  func didReply(tweetCell: TweetCell, replyToTweetWithId tweetId: String) {
     self.performSegueWithIdentifier("ComposeSegue", sender: self)
+  }
+  
+  func didRetweet(tweet: Tweet, tweetCell: TweetCell?) {
+    tweet.retweetCount! += NSInteger(1)
+    tweet.retweeted = true
+    tableView.reloadData()
+  }
+  
+  func didFavorite(tweet: Tweet, tweetCell: TweetCell?) {
+    tweet.favoriteCount! += NSInteger(1)
+    tweet.favorited = true
+    tableView.reloadData()
   }
   
   @IBAction func onLogout(sender: AnyObject) {
@@ -84,6 +96,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
       var nav = segue.destinationViewController as! UINavigationController
       var vc = nav.topViewController as! SingleTweetViewController
       vc.tweet = tweet
+      vc.delegate = self
     }
   }
   
