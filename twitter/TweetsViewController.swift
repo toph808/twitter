@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   var tweets: [Tweet]?
   var inReplyToId: String?
   var inReplyToUsername: String?
+  var isLoading = false
   
   @IBOutlet weak var tableView: UITableView!
   var refreshControl: UIRefreshControl!
@@ -21,23 +22,29 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     super.viewDidLoad()
     
     self.refreshControl = UIRefreshControl()
-    self.refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+    self.refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
     self.tableView.insertSubview(self.refreshControl, atIndex: 0)
+    
+    self.tableView.dataSource = self
+    self.tableView.delegate = self
+    self.tableView.rowHeight = UITableViewAutomaticDimension
+    self.tableView.estimatedRowHeight = 120
     
     TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
       if error != nil {
         println(error)
+        UIAlertView(title: "Error!", message: "Request failed - probably don't fire so many requests?", delegate: nil, cancelButtonTitle: "OK").show()
       }
       self.tweets = tweets
-      
-      self.tableView.dataSource = self
-      self.tableView.delegate = self
-      self.tableView.rowHeight = UITableViewAutomaticDimension
-      self.tableView.estimatedRowHeight = 120
+      self.tableView.reloadData()
     })
   }
   
-  func onRefresh() {
+  override func viewDidAppear(animated: Bool) {
+    self.tableView.reloadData()
+  }
+  
+  func refreshData() {
     TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
       self.tweets = tweets
       
@@ -62,6 +69,22 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
     cell.delegate = self
     cell.tweet = self.tweets?[indexPath.row]
+    
+    if (indexPath.row == self.tweets!.count - 1 && isLoading == false) {
+      isLoading = true
+      var params = ["max_id": cell.tweet.id!] as NSDictionary
+      
+      TwitterClient.sharedInstance.homeTimelineWithParams(params, completion: { (tweets, error) -> () in
+        if error != nil {
+          println(error)
+          UIAlertView(title: "Error!", message: "Request failed - probably don't fire so many requests?", delegate: nil, cancelButtonTitle: "OK").show()
+        }
+        self.tweets = tweets
+        self.tableView.reloadData()
+        
+        self.isLoading = false
+      })
+    }
     
     return cell
   }
