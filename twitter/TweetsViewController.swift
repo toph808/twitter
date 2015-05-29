@@ -79,7 +79,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
           println(error)
           UIAlertView(title: "Error!", message: "Request failed - probably don't fire so many requests?", delegate: nil, cancelButtonTitle: "OK").show()
         }
-        self.tweets = tweets
+        self.tweets = self.tweets! + tweets!
         self.tableView.reloadData()
         
         self.isLoading = false
