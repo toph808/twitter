@@ -74,7 +74,7 @@
                                         <rect key="frame" x="8" y="88" width="139" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Timeline">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.63184472817577697" green="0.85265817462288973" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -85,7 +85,7 @@
                                         <rect key="frame" x="8" y="132" width="139" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Mentions">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.63184472817577697" green="0.85265817462288973" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -96,7 +96,7 @@
                                         <rect key="frame" x="8" y="44" width="139" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Profile">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.63184472817577697" green="0.85265817462288973" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -104,7 +104,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.38823529411764707" green="0.6705882352941176" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.38201125226654375" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qxB-C7-UeN" secondAttribute="trailing" constant="-17" id="3y7-5c-7CU"/>
                                     <constraint firstItem="fry-B4-Z9q" firstAttribute="top" secondItem="5xw-Xb-vKQ" secondAttribute="bottom" constant="8" id="6lw-v6-AqJ"/>
@@ -122,21 +122,37 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="GFr-8n-Muv" firstAttribute="top" secondItem="MLd-Ip-DED" secondAttribute="bottom" id="4Gc-KE-Nzr"/>
                             <constraint firstItem="MLd-Ip-DED" firstAttribute="leading" secondItem="riH-SY-ZvJ" secondAttribute="leading" id="J3e-nh-c85"/>
                             <constraint firstItem="MLd-Ip-DED" firstAttribute="top" secondItem="riH-SY-ZvJ" secondAttribute="top" id="Jog-0l-aV0"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="cPG-mt-abZ" appends="YES" id="Fo6-nj-Kge"/>
+                            <outletCollection property="gestureRecognizers" destination="3eF-6h-2Nw" appends="YES" id="cDT-9x-Y85"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="contentView" destination="riH-SY-ZvJ" id="Fls-ya-E99"/>
                         <outlet property="hamburgerMenuView" destination="MLd-Ip-DED" id="jq6-ly-jsI"/>
+                        <outlet property="leftConstraint" destination="J3e-nh-c85" id="9Qr-tF-oWh"/>
                         <outlet property="mentionsButton" destination="fry-B4-Z9q" id="KLt-AD-cFp"/>
                         <outlet property="profileButton" destination="qxB-C7-UeN" id="fgW-Ku-btF"/>
                         <outlet property="timelineButton" destination="5xw-Xb-vKQ" id="O7Q-bE-saa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XS3-YB-7Zs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="cPG-mt-abZ">
+                    <connections>
+                        <action selector="onSwipeRight:" destination="DW4-cH-Ppg" id="dLY-CV-p4U"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="3eF-6h-2Nw">
+                    <connections>
+                        <action selector="onSwipeLeft:" destination="DW4-cH-Ppg" id="63s-0H-ixs"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="817" y="328"/>
         </scene>

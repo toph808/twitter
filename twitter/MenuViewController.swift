@@ -16,6 +16,8 @@ class MenuViewController: UIViewController {
   @IBOutlet weak var timelineButton: UIButton!
   @IBOutlet weak var mentionsButton: UIButton!
   
+  @IBOutlet weak var leftConstraint: NSLayoutConstraint!
+  
   var viewControllers = [UIViewController]()
   var activeViewController: UIViewController? {
     didSet(oldViewControllerOrNil) {
@@ -29,6 +31,8 @@ class MenuViewController: UIViewController {
         newVC.view.frame = self.contentView.bounds
         self.contentView.addSubview(newVC.view)
         newVC.didMoveToParentViewController(self)
+        self.contentView.bringSubviewToFront(hamburgerMenuView)
+        self.leftConstraint.constant = -130
       }
     }
   }
@@ -36,12 +40,18 @@ class MenuViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    var timelineVC = storyboard?.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
-    var mentionsVC = storyboard?.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
+    var timelineNav = storyboard?.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
+    var mentionsNav = storyboard?.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
     
-    self.activeViewController = timelineVC
+    // Pass data to timeline/mentions VCs
+    var timelineVC = timelineNav.viewControllers[0] as! TweetsViewController
+    timelineVC.timelineType = "home"
     
-    self.viewControllers = [timelineVC, mentionsVC]
+    var mentionsVC = mentionsNav.viewControllers[0] as! TweetsViewController
+    mentionsVC.timelineType = "mentions"
+    
+    self.activeViewController = timelineNav
+    self.viewControllers = [timelineNav, mentionsNav]
   }
   
   override func didReceiveMemoryWarning() {
@@ -60,6 +70,19 @@ class MenuViewController: UIViewController {
     activeViewController = viewControllers[1]
   }
   
+  @IBAction func onSwipeRight(sender: UISwipeGestureRecognizer) {
+    UIView.animateWithDuration(0.2, animations: { () -> Void in
+      self.leftConstraint.constant = 0
+      self.view.layoutIfNeeded()
+    })
+  }
+  
+  @IBAction func onSwipeLeft(sender: UISwipeGestureRecognizer) {
+    UIView.animateWithDuration(0.2, animations: { () -> Void in
+      self.leftConstraint.constant = -130
+      self.view.layoutIfNeeded()
+    })
+  }
   /*
   // MARK: - Navigation
   

@@ -14,6 +14,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   var inReplyToId: String?
   var inReplyToUsername: String?
   var isLoading = false
+  var timelineType: String?
   
   @IBOutlet weak var tableView: UITableView!
   var refreshControl: UIRefreshControl!
@@ -34,7 +35,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     self.tableView.rowHeight = UITableViewAutomaticDimension
     self.tableView.estimatedRowHeight = 120
     
-    TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+    TwitterClient.sharedInstance.fetchTimelineWithParams(nil, forTimelineType: timelineType!, completion: { (tweets, error) -> () in
       if error != nil {
         println(error)
         UIAlertView(title: "Error!", message: "Request failed - probably don't fire so many requests?", delegate: nil, cancelButtonTitle: "OK").show()
@@ -55,7 +56,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   }
   
   func refreshData() {
-    TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
+    TwitterClient.sharedInstance.fetchTimelineWithParams(nil, forTimelineType: timelineType!, completion: { (tweets, error) -> () in
       self.tweets = tweets
       
       if self.refreshControl.refreshing {
@@ -84,7 +85,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
       isLoading = true
       var params = ["max_id": cell.tweet.id!] as NSDictionary
       
-      TwitterClient.sharedInstance.homeTimelineWithParams(params, completion: { (tweets, error) -> () in
+      TwitterClient.sharedInstance.fetchTimelineWithParams(params, forTimelineType: timelineType!, completion: { (tweets, error) -> () in
         if error != nil {
           println(error)
           UIAlertView(title: "Error!", message: "Request failed - probably don't fire so many requests?", delegate: nil, cancelButtonTitle: "OK").show()
