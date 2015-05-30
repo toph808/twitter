@@ -38,8 +38,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
       if error != nil {
         println(error)
         UIAlertView(title: "Error!", message: "Request failed - probably don't fire so many requests?", delegate: nil, cancelButtonTitle: "OK").show()
+        var data = NSUserDefaults.standardUserDefaults().objectForKey("kLastTweetData") as? [NSDictionary]
+//        println(NSUserDefaults.standardUserDefaults().objectForKey("kLastTweetData"))
+        if (data != nil) {
+          self.tweets = Tweet.tweetsWithArray(data!)
+        }
+      } else {
+        self.tweets = tweets
       }
-      self.tweets = tweets
       self.tableView.reloadData()
     })
   }
@@ -82,8 +88,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         if error != nil {
           println(error)
           UIAlertView(title: "Error!", message: "Request failed - probably don't fire so many requests?", delegate: nil, cancelButtonTitle: "OK").show()
+        } else {
+          self.tweets = self.tweets! + tweets!
         }
-        self.tweets = self.tweets! + tweets!
         self.tableView.reloadData()
         
         self.isLoading = false

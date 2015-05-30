@@ -48,17 +48,102 @@
                     <navigationItem key="navigationItem" id="jjv-RE-onf"/>
                     <connections>
                         <outlet property="loginButton" destination="Hyp-MT-Gv7" id="YoJ-NH-UNy"/>
-                        <segue destination="oLS-fm-Sza" kind="modal" identifier="LoginSegue" id="gVs-6I-ILQ"/>
+                        <segue destination="DW4-cH-Ppg" kind="modal" identifier="LoginSegue" id="Rrv-uh-4na"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="328"/>
+            <point key="canvasLocation" x="427" y="328"/>
         </scene>
-        <!--Home-->
+        <!--MenuViewController-->
+        <scene sceneID="M7j-ya-i0L">
+            <objects>
+                <viewController storyboardIdentifier="MenuViewController" title="MenuViewController" id="DW4-cH-Ppg" customClass="MenuViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G0b-Us-cuv"/>
+                        <viewControllerLayoutGuide type="bottom" id="GFr-8n-Muv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="riH-SY-ZvJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLd-Ip-DED">
+                                <rect key="frame" x="0.0" y="0.0" width="130" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xw-Xb-vKQ">
+                                        <rect key="frame" x="8" y="88" width="139" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Timeline">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTimelineButton:" destination="DW4-cH-Ppg" eventType="touchUpInside" id="D2t-OD-7tq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fry-B4-Z9q">
+                                        <rect key="frame" x="8" y="132" width="139" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Mentions">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onMentionsButton:" destination="DW4-cH-Ppg" eventType="touchUpInside" id="RAs-0s-F7d"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxB-C7-UeN">
+                                        <rect key="frame" x="8" y="44" width="139" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Profile">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onProfileButton:" destination="DW4-cH-Ppg" eventType="touchUpInside" id="cf7-v3-1dC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.38823529411764707" green="0.6705882352941176" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="qxB-C7-UeN" secondAttribute="trailing" constant="-17" id="3y7-5c-7CU"/>
+                                    <constraint firstItem="fry-B4-Z9q" firstAttribute="top" secondItem="5xw-Xb-vKQ" secondAttribute="bottom" constant="8" id="6lw-v6-AqJ"/>
+                                    <constraint firstItem="fry-B4-Z9q" firstAttribute="leading" secondItem="MLd-Ip-DED" secondAttribute="leading" constant="8" id="8HP-Ns-9vT"/>
+                                    <constraint firstAttribute="width" constant="130" id="8Si-K2-Cr5"/>
+                                    <constraint firstItem="5xw-Xb-vKQ" firstAttribute="leading" secondItem="MLd-Ip-DED" secondAttribute="leading" constant="8" id="CZn-1Q-JTd"/>
+                                    <constraint firstItem="5xw-Xb-vKQ" firstAttribute="leading" secondItem="qxB-C7-UeN" secondAttribute="leading" id="Htl-df-7uM"/>
+                                    <constraint firstItem="qxB-C7-UeN" firstAttribute="leading" secondItem="MLd-Ip-DED" secondAttribute="leading" constant="8" id="K5C-yL-u9w"/>
+                                    <constraint firstAttribute="trailing" secondItem="fry-B4-Z9q" secondAttribute="trailing" constant="-17" id="e3N-5I-jur"/>
+                                    <constraint firstItem="qxB-C7-UeN" firstAttribute="top" secondItem="MLd-Ip-DED" secondAttribute="top" constant="44" id="hkG-LR-pbx"/>
+                                    <constraint firstItem="5xw-Xb-vKQ" firstAttribute="leading" secondItem="fry-B4-Z9q" secondAttribute="leading" id="vEs-YU-gcn"/>
+                                    <constraint firstItem="5xw-Xb-vKQ" firstAttribute="top" secondItem="qxB-C7-UeN" secondAttribute="bottom" constant="8" id="wcc-oR-MtC"/>
+                                    <constraint firstAttribute="trailing" secondItem="5xw-Xb-vKQ" secondAttribute="trailing" constant="-17" id="znS-Z9-chY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GFr-8n-Muv" firstAttribute="top" secondItem="MLd-Ip-DED" secondAttribute="bottom" id="4Gc-KE-Nzr"/>
+                            <constraint firstItem="MLd-Ip-DED" firstAttribute="leading" secondItem="riH-SY-ZvJ" secondAttribute="leading" id="J3e-nh-c85"/>
+                            <constraint firstItem="MLd-Ip-DED" firstAttribute="top" secondItem="riH-SY-ZvJ" secondAttribute="top" id="Jog-0l-aV0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="riH-SY-ZvJ" id="Fls-ya-E99"/>
+                        <outlet property="hamburgerMenuView" destination="MLd-Ip-DED" id="jq6-ly-jsI"/>
+                        <outlet property="mentionsButton" destination="fry-B4-Z9q" id="KLt-AD-cFp"/>
+                        <outlet property="profileButton" destination="qxB-C7-UeN" id="fgW-Ku-btF"/>
+                        <outlet property="timelineButton" destination="5xw-Xb-vKQ" id="O7Q-bE-saa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XS3-YB-7Zs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="328"/>
+        </scene>
+        <!--TweetsViewController-->
         <scene sceneID="grx-JD-47O">
             <objects>
-                <viewController storyboardIdentifier="TweetsViewController" id="WiC-Lg-M0J" customClass="TweetsViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TweetsViewController" title="TweetsViewController" id="WiC-Lg-M0J" customClass="TweetsViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Ym-Jd-pF3"/>
                         <viewControllerLayoutGuide type="bottom" id="G8M-Uv-F3C"/>
@@ -225,12 +310,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTW-yQ-2gF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1248" y="328"/>
+            <point key="canvasLocation" x="1550" y="328"/>
         </scene>
-        <!--Single Tweet-->
+        <!--SingleTweetViewController-->
         <scene sceneID="Xmq-9R-bdm">
             <objects>
-                <viewController storyboardIdentifier="SingleTweetViewController" id="coF-rL-68z" customClass="SingleTweetViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SingleTweetViewController" title="SingleTweetViewController" id="coF-rL-68z" customClass="SingleTweetViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N5M-sE-Z2v"/>
                         <viewControllerLayoutGuide type="bottom" id="h3P-82-riB"/>
@@ -375,12 +460,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3aY-Mu-53z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="328"/>
+            <point key="canvasLocation" x="2238" y="328"/>
         </scene>
-        <!--Compose-->
+        <!--ComposeViewController-->
         <scene sceneID="FCw-bU-fmH">
             <objects>
-                <viewController id="dYI-9A-yKd" customClass="ComposeViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComposeViewController" title="ComposeViewController" id="dYI-9A-yKd" customClass="ComposeViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Io1-ot-c7w"/>
                         <viewControllerLayoutGuide type="bottom" id="Hyn-VW-dF9"/>
@@ -437,7 +522,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6l2-6G-s7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2682" y="328"/>
+            <point key="canvasLocation" x="2925" y="328"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KeP-OJ-klp">
@@ -455,12 +540,12 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="162" y="328"/>
+            <point key="canvasLocation" x="88" y="328"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--TweetsNavigationController-->
         <scene sceneID="ccu-uj-Ipj">
             <objects>
-                <navigationController storyboardIdentifier="TweetsViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="oLS-fm-Sza" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" title="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="oLS-fm-Sza" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Aar-HA-5Va">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -473,12 +558,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3RH-zz-CTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="887" y="328"/>
+            <point key="canvasLocation" x="1182" y="328"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--SingleTweetNavigationController-->
         <scene sceneID="UzX-ky-Pzu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PfL-8h-6RC" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SingleTweetNavigationController" title="SingleTweetNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="PfL-8h-6RC" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="zNs-2E-RrJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UMf-ah-dMg">
@@ -492,12 +577,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ffp-fD-wEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1603" y="328"/>
+            <point key="canvasLocation" x="1890" y="328"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--ComposeNavigationController-->
         <scene sceneID="Ipj-DC-X9v">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lag-Sc-fsM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ComposeNavigationController" title="ComposeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Lag-Sc-fsM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WgH-u6-CLF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -510,7 +595,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EcD-sd-hrb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2327" y="328"/>
+            <point key="canvasLocation" x="2587" y="328"/>
         </scene>
     </scenes>
     <resources>
