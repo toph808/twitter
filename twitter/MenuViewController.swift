@@ -40,10 +40,12 @@ class MenuViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    var profileNav = storyboard? .instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
     var timelineNav = storyboard?.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
     var mentionsNav = storyboard?.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
     
-    // Pass data to timeline/mentions VCs
+    var profileVC = profileNav.viewControllers[0] as! ProfileViewController
+    
     var timelineVC = timelineNav.viewControllers[0] as! TweetsViewController
     timelineVC.timelineType = "home"
     
@@ -51,7 +53,7 @@ class MenuViewController: UIViewController {
     mentionsVC.timelineType = "mentions"
     
     self.activeViewController = timelineNav
-    self.viewControllers = [timelineNav, mentionsNav]
+    self.viewControllers = [profileNav, timelineNav, mentionsNav]
   }
   
   override func didReceiveMemoryWarning() {
@@ -60,14 +62,15 @@ class MenuViewController: UIViewController {
   }
   
   @IBAction func onProfileButton(sender: AnyObject) {
-  }
-  
-  @IBAction func onTimelineButton(sender: AnyObject) {
     activeViewController = viewControllers[0]
   }
   
-  @IBAction func onMentionsButton(sender: AnyObject) {
+  @IBAction func onTimelineButton(sender: AnyObject) {
     activeViewController = viewControllers[1]
+  }
+  
+  @IBAction func onMentionsButton(sender: AnyObject) {
+    activeViewController = viewControllers[2]
   }
   
   @IBAction func onSwipeRight(sender: UISwipeGestureRecognizer) {

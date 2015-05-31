@@ -17,6 +17,7 @@ class User: NSObject {
   var name: String?
   var screenname: String?
   var profileImageUrl: NSURL?
+//  var profileBannerUrl: NSURL?
   var tagline: String?
   var dictionary: NSDictionary
   
