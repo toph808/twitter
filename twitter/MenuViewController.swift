@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, MenuItemDelegate {
   
   @IBOutlet var contentView: UIView!
   @IBOutlet weak var hamburgerMenuView: UIView!
@@ -18,6 +18,7 @@ class MenuViewController: UIViewController {
   
   @IBOutlet weak var leftConstraint: NSLayoutConstraint!
   
+  var navigationControllers = [UIViewController]()
   var viewControllers = [UIViewController]()
   var activeViewController: UIViewController? {
     didSet(oldViewControllerOrNil) {
@@ -45,15 +46,19 @@ class MenuViewController: UIViewController {
     var mentionsNav = storyboard?.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
     
     var profileVC = profileNav.viewControllers[0] as! ProfileViewController
+    profileVC.delegate = self
     
     var timelineVC = timelineNav.viewControllers[0] as! TweetsViewController
+    timelineVC.delegate = self
     timelineVC.timelineType = "home"
     
     var mentionsVC = mentionsNav.viewControllers[0] as! TweetsViewController
+    mentionsVC.delegate = self
     mentionsVC.timelineType = "mentions"
     
     self.activeViewController = timelineNav
-    self.viewControllers = [profileNav, timelineNav, mentionsNav]
+    self.navigationControllers = [profileNav, timelineNav, mentionsNav]
+    self.viewControllers = [profileVC, timelineVC, mentionsVC]
   }
   
   override func didReceiveMemoryWarning() {
@@ -62,15 +67,17 @@ class MenuViewController: UIViewController {
   }
   
   @IBAction func onProfileButton(sender: AnyObject) {
-    activeViewController = viewControllers[0]
+    var vc = viewControllers[0] as! ProfileViewController
+    vc.currentUser = nil
+    activeViewController = navigationControllers[0]
   }
   
   @IBAction func onTimelineButton(sender: AnyObject) {
-    activeViewController = viewControllers[1]
+    activeViewController = navigationControllers[1]
   }
   
   @IBAction func onMentionsButton(sender: AnyObject) {
-    activeViewController = viewControllers[2]
+    activeViewController = navigationControllers[2]
   }
   
   @IBAction func onSwipeRight(sender: UISwipeGestureRecognizer) {
@@ -86,6 +93,13 @@ class MenuViewController: UIViewController {
       self.view.layoutIfNeeded()
     })
   }
+  
+  func didTapThumb(user: User) {
+    var vc = viewControllers[0] as! ProfileViewController
+    vc.currentUser = user
+    activeViewController = navigationControllers[0] as! UINavigationController
+  }
+  
   /*
   // MARK: - Navigation
   

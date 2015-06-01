@@ -15,6 +15,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
   var inReplyToUsername: String?
   var currentUser: User?
   var isLoading = false
+
+  weak var delegate: MenuItemDelegate?
   
   var refreshControl: UIRefreshControl!
   @IBOutlet weak var tableView: UITableView!
@@ -127,6 +129,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     tweet.favoriteCount! += NSInteger(1)
     tweet.favorited = true
     tableView.reloadData()
+  }
+  
+  func didTapThumb(user: User) {
+    self.delegate?.didTapThumb?(user)
   }
   
   @IBAction func onLogout(sender: AnyObject) {

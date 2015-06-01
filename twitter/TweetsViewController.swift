@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol MenuItemDelegate {
+  optional func didTapThumb(user: User)
+}
+
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetDelegate {
   
   var tweets: [Tweet]?
@@ -15,6 +19,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   var inReplyToUsername: String?
   var isLoading = false
   var timelineType: String?
+  
+  weak var delegate: MenuItemDelegate?
   
   @IBOutlet weak var tableView: UITableView!
   var refreshControl: UIRefreshControl!
@@ -115,6 +121,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     tweet.favorited = true
     tableView.reloadData()
   }
+  
+  func didTapThumb(user: User) {
+    self.delegate?.didTapThumb?(user)
+  }
+  
+  //    var profileNav = storyboard? .instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
+  //    var profileVC = profileNav.viewControllers[0] as! ProfileViewController
+  //
+  //    profileVC.currentUser = user
+  //    self.navigationController?.presentViewController(profileNav, animated: true, completion: { () -> Void in
+  //    })
   
   @IBAction func onLogout(sender: AnyObject) {
     User.currentUser?.logout()

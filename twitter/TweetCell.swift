@@ -12,6 +12,7 @@ import UIKit
   optional func didRetweet(tweet: Tweet, tweetCell: TweetCell?)
   optional func didFavorite(tweet: Tweet, tweetCell: TweetCell?)
   optional func didReply(tweet: Tweet)
+  optional func didTapThumb(user: User)
 }
 
 class TweetCell: UITableViewCell {
@@ -54,6 +55,7 @@ class TweetCell: UITableViewCell {
     replyIcon.userInteractionEnabled = true
     retweetIcon.userInteractionEnabled = true
     favoriteIcon.userInteractionEnabled = true
+    thumbImageView.userInteractionEnabled = true
     
     var replyTap = UITapGestureRecognizer(target: self, action:Selector("onReply:"))
     replyIcon.addGestureRecognizer(replyTap)
@@ -61,6 +63,8 @@ class TweetCell: UITableViewCell {
     retweetIcon.addGestureRecognizer(retweetTap)
     var favoriteTap = UITapGestureRecognizer(target: self, action:Selector("onFavorite:"))
     favoriteIcon.addGestureRecognizer(favoriteTap)
+    var thumbTap = UITapGestureRecognizer(target: self, action:Selector("onThumbTap:"))
+    thumbImageView.addGestureRecognizer(thumbTap)
   }
   
   override func layoutSubviews() {
@@ -103,6 +107,12 @@ class TweetCell: UITableViewCell {
         self.delegate?.didFavorite?(self.tweet, tweetCell: self)
       }
     })
+  }
+  
+  func onThumbTap(recognizer: UITapGestureRecognizer) {
+    println("tapped")
+    var user = self.tweet.user!
+    self.delegate?.didTapThumb?(user)
   }
   
 }
