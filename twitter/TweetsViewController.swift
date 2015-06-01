@@ -35,6 +35,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     self.tableView.rowHeight = UITableViewAutomaticDimension
     self.tableView.estimatedRowHeight = 120
     
+    refreshData()
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    refreshData()
+  }
+  
+  func refreshData() {
     TwitterClient.sharedInstance.fetchTimelineWithParams(nil, forTimelineType: timelineType!, completion: { (tweets, error) -> () in
       if error != nil {
         println(error)
@@ -42,22 +51,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
       } else {
         self.tweets = tweets
       }
-      self.tableView.reloadData()
-    })
-  }
-  
-  override func viewDidAppear(animated: Bool) {
-    refreshData()
-  }
-  
-  func refreshData() {
-    TwitterClient.sharedInstance.fetchTimelineWithParams(nil, forTimelineType: timelineType!, completion: { (tweets, error) -> () in
-      self.tweets = tweets
-      
       if self.refreshControl.refreshing {
         self.refreshControl.endRefreshing()
       }
-      
       self.tableView.reloadData()
     })
   }

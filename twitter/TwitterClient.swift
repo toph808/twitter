@@ -47,6 +47,15 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     })
   }
   
+  func fetchProfileBannerWithParams(params: NSDictionary?, completion: (sizes: NSDictionary?, error: NSError?) -> ()) {
+    GET("1.1/users/profile_banner.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+      var sizes = response as! NSDictionary
+      completion(sizes: sizes, error: nil)
+      }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+        completion(sizes: nil, error: error)
+    })
+  }
+  
   func tweetWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
     POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
       var tweet = Tweet(dictionary: response as! NSDictionary)
